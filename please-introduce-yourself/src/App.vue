@@ -13,15 +13,10 @@
         <button class="btn btn-primary" type="submit">Send</button>
       </form>
       <hr/>
-      <div class="card-group">
-        <div class="card" v-for="message in messages">
-          <div class="card-block">
-            <h5 class="card-title">{{ message.title }}</h5>
-            <p class="card-text">{{ message.text }}</p>
-            <p class="card-text"><small class="text-muted">Added on {{ dateToString(message.timestamp) }}</small></p>
-          </div> <!-- card-block -->
-        </div> <!-- card -->
-      </div> <!-- card-group -->
+      <div class="card-columns">
+        <card class="card-outline-success" :title="'Hello!'" :text="'This is our fixed card!'" :footer="'Added on ' + dateToString(Date.now())"></card>
+        <card v-for="message in messages" :key="message.id" :title="message.title" :text="message.text" :footer="'Added on ' + dateToString(message.timestamp)"></card>
+      </div> <!-- card-columns -->
     </div> <!-- container -->
   </div> <!-- jumbotron -->
 </template>
@@ -29,6 +24,7 @@
 <script>
   import Firebase from 'firebase'
   import { dateToString } from './utils/utils'
+  import Card from './components/Card';
 
   let config = {
     apiKey: "AIzaSyB68bmVWRGDNQp1zsFYlNmw9hl5taP958M",
@@ -45,6 +41,9 @@
 
   export default {
     name: 'app',
+    components: {
+      Card
+    },
     firebase: {
       messages: messageRef
     },
