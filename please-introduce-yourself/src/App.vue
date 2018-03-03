@@ -1,19 +1,36 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <div v-for="message in messages">
+      <h4>{{ message.title }}</h4>
+      <p>{{ message.text }}</p>
+      <p>{{ message.timestamp }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+  import Firebase from 'firebase'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  let config = {
+    apiKey: "AIzaSyB68bmVWRGDNQp1zsFYlNmw9hl5taP958M",
+    authDomain: "pleaseintroduceyourself-f17ca.firebaseapp.com",
+    databaseURL: "https://pleaseintroduceyourself-f17ca.firebaseio.com",
+    projectId: "pleaseintroduceyourself-f17ca",
+    storageBucket: "pleaseintroduceyourself-f17ca.appspot.com",
+    messagingSenderId: "199554124963"
+  };
+
+  let app = Firebase.initializeApp(config)
+  let db = app.database()
+  let messageRef = db.ref('messages')
+
+  export default {
+    name: 'app',
+    firebase: {
+      messages: messageRef
+    }
   }
-}
+
 </script>
 
 <style>
