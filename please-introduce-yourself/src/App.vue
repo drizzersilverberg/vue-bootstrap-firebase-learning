@@ -3,13 +3,13 @@
     <div class="container">
       <h1>Hello! Nice to meet you!</h1>
       <hr/>
-      <form action="#">
+      <form action="#" @submit="addMessage">
         <div class="form-group">
-          <input class="form-control" maxlength="40" autofocus placeholder="Please introduce yourself :)" />
-        </div>
+          <input class="form-control" v-model="newMessage.title" maxlength="40" autofocus placeholder="Please introduce yourself :)" />
+        </div> <!-- form-group -->
         <div class="form-group">
-          <textarea class="form-control" placeholder="Leave your message" rows="3"></textarea>
-        </div>
+          <textarea class="form-control" v-model="newMessage.text" placeholder="Leave your message" rows="3"></textarea>
+        </div> <!-- form-group -->
         <button class="btn btn-primary" type="submit">Send</button>
       </form>
       <hr/>
@@ -19,9 +19,9 @@
             <h5 class="card-title">{{ message.title }}</h5>
             <p class="card-text">{{ message.text }}</p>
             <p class="card-text"><small class="text-muted">Added on {{ message.timestamp }}</small></p>
-          </div>
+          </div> <!-- card-block -->
         </div> <!-- card -->
-      </div>
+      </div> <!-- card-group -->
     </div> <!-- container -->
   </div> <!-- jumbotron -->
 </template>
@@ -46,6 +46,37 @@
     name: 'app',
     firebase: {
       messages: messageRef
+    },
+    data () {
+      return {
+        newMessage: {
+          title: '',
+          text: '',
+          timestamp: null
+        }
+      }
+    },
+    methods: {
+      addMessage (e) {
+        // prevent page directing
+        e.preventDefault()
+
+        // prevent empty title and don't proceed
+        if (this.newMessage.title === '') {
+          return
+        }
+
+        // use current date
+        this.newMessage.timestamp = Date.now()
+
+        // save to firebase
+        messageRef.push(this.newMessage)
+
+        // clear form
+        this.newMessage.title = ''
+        this.newMessage.text = ''
+        this.newMessage.timestamp = null
+      }
     }
   }
 
