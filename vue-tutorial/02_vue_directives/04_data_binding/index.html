@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vue - Data Binding</title>
+  </head>
+  <body>
+    <div id="app">
+      69 + 31 = <input type="text" v-model.number.lazy.trim="solution" v-bind:style="solution === 100 ? green : red"> (press <em>Enter</em> or unfocus the input to answer)
+      <!--
+        .lazy: This will only update the data on a change event (try it with our input and you'll see that changes in the input will only affect other parts where the name is used when the Enter button is pressed and not on each key press)
+        .number: This will cast your input to number
+        .trim: This will trim the user's input
+       -->
+    </div> <!-- app -->
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          solution: '',
+          green: 'background-color: green; width:50px;',
+          red: 'background-color: red; width:50px;'
+        }
+      })
+    </script>
+  </body>
+</html>

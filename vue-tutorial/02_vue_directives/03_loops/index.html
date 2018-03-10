@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vue - Loops</title>
+  </head>
+  <body>
+    <div id="app">
+      <ol>
+        <li v-for="animal in animals" v-html="animalCodes[animal]"></li>
+      </ol>
+    </div> <!-- app -->
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script>
+      const animalCodes = {
+        dog: '&#x1f436;',
+        cat: '&#x1f638;',
+        monkey: '&#x1f435;',
+        unicorn: '&#x1f984;'
+      }
+
+      const animals = ['dog', 'cat', 'monkey', 'unicorn']
+
+      const data = {
+        animalCodes,
+        animals
+      }
+
+      new Vue({
+        el: '#app',
+        data
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vue - Conditional Rendering</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <label for="name">What's your name?</label>
+        <input id="name" type="text" v-model="name">
+      </div>
+      <!-- v-show for hide element -->
+      <h1><span v-show="name">Hello, <strong>{{name}}</strong>! Let's learn Vue.js</span></h1>
+      <!-- v-if for remove element -->
+      <h1><span v-if="name">Hello, <strong>{{name}}</strong>! Let's learn Vue.js</span></h1>
+      <!-- you can inspect the page to see the difference -->
+    </div> <!-- app -->
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script>
+      var data = {name: 'Sheldon'}
+
+      new Vue({
+        el: '#app',
+        data
+      })
+    </script>
+  </body>
+</html>

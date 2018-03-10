@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vue - Text/HTML</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>Using double-bracket: <span>{{animalCodes.cat}}</span></div>
+      <div>Using v-text: <span v-text="animalCodes.cat"></span></div>
+      <div>Using v-html: <span v-html="animalCodes.cat"></span></div>
+    </div> <!-- app -->
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script>
+      const animalCodes = {
+        dog: '&#x1f436;',
+        cat: '&#x1f638;',
+        monkey: '&#x1f435;',
+        unicorn: '&#x1f984;'
+      }
+
+      const data = {
+        animalCodes
+      }
+
+      new Vue({
+        el: '#app',
+        data
+      })
+    </script>
+  </body>
+</html>

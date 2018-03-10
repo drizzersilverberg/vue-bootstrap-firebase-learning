@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vue - Handling Event</title>
+  </head>
+  <body>
+    <div id="app">
+      <select @change="populateAnimalsForZoo" multiple="multiple" name="animals" id="animals">
+        <option v-for="animal in animals" :value="animal">{{animal}}</option>
+      </select><br>
+      <ol>
+        <li class="animal-list" v-for="animal in animalsForZoo">
+          <span class="animal" v-html="animalCodes[animal]"></span>
+        </li>
+      </ol>
+      <button @click="resetZoo">Clear</button>
+      <button @mouseover="infoZoo">Info</button>
+    </div> <!-- app -->
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script>
+
+      const animalCodes = {
+        dog: '&#x1f436;',
+        cat : '&#x1f638;',
+        monkey : '&#x1f435;',
+        unicorn : '&#x1f984;',
+        tiger : '&#x1f42f;',
+        mouse : '&#x1f42d;',
+        rabbit : '&#x1f430;',
+        cow : '&#x1f42e;',
+        whale : '&#x1f433;',
+        horse : '&#x1f434;',
+        pig : '&#x1f437;',
+        frog : '&#x1f438;',
+        koala : '&#x1f43c;'
+      }
+
+      var animals = Object.keys(animalCodes)
+      var animalsForZoo = []
+
+      new Vue({
+        el: '#app',
+        data: {
+          animalCodes,
+          animalsForZoo,
+          animals
+        },
+        methods: {
+          populateAnimalsForZoo (event) {
+            const selected = document.querySelectorAll('#animals option:checked')
+            for (var i=0; i < selected.length; i++) {
+              this.animalsForZoo.push(selected[i].value)
+            }
+          },
+          resetZoo (event) {
+            this.animalsForZoo = []
+          },
+          infoZoo (event) {
+              alert('You have selected ' + this.animalsForZoo.length + ' animals')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
