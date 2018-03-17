@@ -1,17 +1,23 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld/>
+    <alert :title="title" :text="text"></alert>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Alert from './components/Alert'
 
 export default {
+  data () {
+    return {
+      title: 'Vue Bootstrap Component',
+      text: 'Isn\'t it easy?'
+    }
+  },
   name: 'App',
   components: {
-    HelloWorld
+    Alert
   }
 }
 </script>
